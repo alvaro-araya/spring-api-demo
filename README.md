@@ -8,7 +8,7 @@
 
 1. Debe instalar [Docker Desktop](https://www.docker.com/products/docker-desktop)
 2. Debe instalar **docker-compose** siguiendo las instrucciones correspondientes a su sisrtema operativo [Install Docker Compose](https://docs.docker.com/compose/install/)
-3. Dirigirse al directorio `./platform/mariadb`
+3. Dirigirse al directorio `./pandemics/platform/mariadb`
 4. Ejecutar el comando:`$ docker-compose up`
 5. Al iniciar automáticamente se inicializará la base de datos **pandemicsdb**.
 
