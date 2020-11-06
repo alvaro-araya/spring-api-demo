@@ -1,0 +1,212 @@
+---
+info:
+  description: Especificación Pandemics API, Alvaro Araya O.
+  version: '1.0'
+  title: Pandemics International API
+  contact:
+    email: coder@aao.cr
+host: localhost:8080
+basePath: /api/v1
+tags:
+  - name: PANDEMICS-API
+    description: Endpoint para obtener patentes
+schemes:
+  - http
+produces:
+  - application/json
+paths:
+  /patentes:
+    get:
+      tags:
+        - Patentes
+      summary: Listado de Patentes
+      description: Listado de Patentes
+      parameters: [ ]
+      responses:
+        '200':
+          description: Respuesta correcta con objetos tipo Patente
+    post:
+      tags:
+        - Patentes
+      summary: Agrega una nueva Patente
+      parameters:
+        - in: body
+          name: patente
+          description: Patente a crear
+          required: false
+          schema:
+            $ref: '#/definitions/patente'
+      responses:
+        '200':
+          description: Respuesta correcta con objetos tipo Patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+  /patentes/{id}:
+    get:
+      tags:
+        - Patentes
+      summary: Obtiene una Patente por su ID
+      description: Obtiene una Patente por su ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la Patente con la que se realizará la búsqueda
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Respuesta correcta con objeto tipo Patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+    put:
+      tags:
+        - Patentes
+      summary: Actualiza una Patente por su ID
+      description: Actualiza una Patente por su ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la Patente que se eliminará
+          required: true
+          type: number
+        - in: body
+          name: patente
+          description: Patente a crear
+          required: false
+          schema:
+            $ref: '#/definitions/patente_1'
+      responses:
+        '200':
+          description: Respuesta correcta al eliminar una patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+    delete:
+      tags:
+        - Patentes
+      summary: Elimina una Patente por su ID
+      description: Elimina una Patente por su ID
+      parameters:
+        - name: id
+          in: path
+          description: ID de la Patente que se eliminará
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Respuesta correcta al eliminar una patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+  /patentes/entidad/{id}:
+    get:
+      tags:
+        - Patentes
+      summary: Obtiene una lista de patentes por el ID del tipo de Entidad
+      description: Obtiene una lista de patentes por el ID del tipo de Entidad
+      parameters:
+        - name: id
+          in: path
+          description: ID de la entidad con la que se realizará la búsqueda de las pantentes
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Respuesta correcta con objetos tipo Patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+  /patentes/guid/{id}:
+    get:
+      tags:
+        - Patentes
+      summary: Obtiene una Patente por el código de GUID
+      description: Obtiene una Patente por el código de GUID
+      parameters:
+        - name: id
+          in: path
+          description: GUID de la Patente
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Respuesta correcta con objetos tipo Patente
+        '400':
+          description: La solicitud no pudo ser procesada
+        '500':
+          description: Error al procesar la solicitud en el servidor
+        default:
+          description: Respuesta estándar de error
+  /tipo-entidad:
+    get:
+      tags:
+        - Patentes
+      summary: Listado de Tipos de Entidad
+      description: Listado de Tipos de Entidad
+      parameters: [ ]
+      responses:
+        '200':
+          description: Respuesta correcta con objetos Tipo Entidad
+definitions:
+  patentes_tipoEntidad:
+    type: object
+    properties:
+      id:
+        type: integer
+      nombre:
+        type: string
+  patente_1:
+    type: object
+    required:
+      - descubierto
+      - especie
+      - tipoEntidad
+    properties:
+      guid:
+        type: string
+      especie:
+        type: string
+      descubierto:
+        type: string
+      tipoEntidad:
+        $ref: '#/definitions/patentes_tipoEntidad'
+      fechaCrea:
+        type: string
+      fechaModifica:
+        type: string
+  patente:
+    type: object
+    required:
+      - descubierto
+      - especie
+      - tipoEntidad
+    properties:
+      guid:
+        type: string
+      especie:
+        type: string
+      descubierto:
+        type: string
+      tipoEntidad:
+        $ref: '#/definitions/patentes_tipoEntidad'
+      fechaCrea:
+        type: string
+      fechaModifica:
+        type: string

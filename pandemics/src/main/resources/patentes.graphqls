@@ -1,0 +1,27 @@
+type Patente {
+    id : ID!,
+    guid: String,
+    especie: String,
+    descubierto: String,
+    tipoEntidad: TipoEntidad,
+    fechaCrea: String,
+    fechaModifica: String
+}
+
+type TipoEntidad {
+    id: ID!,
+    nombre: String
+}
+
+type Query {
+    patentes:[Patente]
+    patente(id: ID):Patente
+    patenteByGUID(guid: String):Patente
+    patentesByEntidad(tipoEntidad: Int):[Patente]
+}
+
+type Mutation {
+    createPatente(especie: String!, descubierto: String!, tipoEntidad: Int!):Patente
+    updatePatente(id: ID!, especie: String!, descubierto: String!, tipoEntidad: Int!):Patente
+    deletePatente(id: ID!):Boolean
+}
